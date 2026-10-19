@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SET詳細 - SET LIBRARY</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <header class="page-header">
+        <a href="/sets" class="site-title">SET LIBRARY</a>
+    </header>
+
+    <main>
+
+        <h2 th:text="${danceSet.name}">SET名</h2>
+
+        <div class="set-detail">
+
+            <div class="detail-item">
+                <span class="detail-label">カテゴリー</span>
+                <span th:text="${danceSet.category}">BASIC SET</span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">説明</span>
+                <span th:text="${danceSet.description}">説明</span>
+            </div>
+
+            <div class="detail-item">
+
+                <span class="detail-label">動画</span>
+
+                <div th:if="${danceSet.videoUrl != null and !danceSet.videoUrl.isEmpty()}">
+
+                    <video controls class="detail-video">
+                        <source th:src="${danceSet.videoUrl}" type="video/mp4">
+                        お使いのブラウザでは動画を再生できません。
+                    </video>
+
+                </div>
+
+                <p th:if="${danceSet.videoUrl == null or danceSet.videoUrl.isEmpty()}">
+                    動画は登録されていません。
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="detail-actions">
+
+            <a th:href="@{/sets/{id}/edit(id=${danceSet.id})}"
+               class="primary-button">
+                SETを編集
+            </a>
+
+            <form th:action="@{/sets/{id}/delete(id=${danceSet.id})}"
+                  method="post"
+                  style="display:inline;">
+
+                <button type="submit"
+                        class="delete-button"
+                        onclick="return confirm('このSETを削除しますか？');">
+                    SETを削除
+                </button>
+
+            </form>
+
+        </div>
+
+        <a href="/sets" class="back-link">
+            ← SET一覧に戻る
+        </a>
+
+    </main>
+
+</div>
+
+</body>
+</html>

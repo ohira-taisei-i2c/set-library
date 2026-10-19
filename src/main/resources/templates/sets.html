@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SET LIBRARY</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <!-- ヘッダー -->
+        <header class="header">
+
+            <h1>SET LIBRARY</h1>
+
+            <a href="/sets/new" class="register-button">
+                ＋ SETを登録
+            </a>
+
+        </header>
+
+
+        <!-- 検索 -->
+        <section class="search-section">
+
+            <form th:action="@{/sets}" method="get" class="search-form">
+
+                <input
+                    type="text"
+                    name="keyword"
+                    placeholder="SET名を検索"
+                    th:value="${keyword}"
+                    class="search-input"
+                >
+
+                <select name="category" class="category-select">
+
+                    <option
+                        value=""
+                        th:selected="${selectedCategory == null or selectedCategory == ''}">
+                        すべて
+                    </option>
+
+                    <option
+                        value="BASIC SET"
+                        th:selected="${selectedCategory == 'BASIC SET'}">
+                        BASIC SET
+                    </option>
+
+                    <option
+                        value="UNIQUE SET"
+                        th:selected="${selectedCategory == 'UNIQUE SET'}">
+                        UNIQUE SET
+                    </option>
+
+                </select>
+
+                <button type="submit" class="search-button">
+                    🔍 検索
+                </button>
+
+                <a th:href="@{/sets}" class="reset-button">
+                    リセット
+                </a>
+
+            </form>
+
+        </section>
+
+
+        <!-- 検索結果件数 -->
+        <p
+            th:if="${showResultCount}"
+            class="result-count"
+        >
+            <span th:text="${resultCount}">0</span>件のSETが見つかりました。
+        </p>
+
+
+        <!-- SET一覧 -->
+        <section class="set-section">
+
+            <h2>SET一覧</h2>
+
+            <div class="set-grid">
+
+                <a
+                    th:each="danceSet : ${danceSets}"
+                    th:href="@{/sets/{id}(id=${danceSet.id})}"
+                    class="set-card"
+                >
+
+                    <div class="set-card-header">
+
+                        <h3 th:text="${danceSet.name}">
+                            SET NAME
+                        </h3>
+
+                        <span
+                            class="category"
+                            th:text="${danceSet.category}">
+                            BASIC SET
+                        </span>
+
+                    </div>
+
+                    <p
+                        class="set-description"
+                        th:if="${danceSet.description != null and danceSet.description != ''}"
+                        th:text="${danceSet.description}">
+                        SETの説明
+                    </p>
+
+                    <div class="set-card-arrow">
+                        →
+                    </div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

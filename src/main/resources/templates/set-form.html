@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>SET登録 - SET LIBRARY</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+	<div class="container">
+
+		<header class="page-header">
+			<a href="/sets" class="site-title">SET LIBRARY</a>
+		</header>
+
+		<main>
+
+			<h2>SETを登録</h2>
+
+			<form th:action="@{/sets}" method="post" enctype="multipart/form-data" class="set-form">
+
+				<div class="form-group">
+					<label>SET名</label>
+					<input type="text" name="name" placeholder="SET名を入力" required>
+				</div>
+
+				<div class="form-group">
+					<label>カテゴリー</label>
+
+					<select name="category" required>
+						<option value="BASIC SET">BASIC SET</option>
+						<option value="UNIQUE SET">UNIQUE SET</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>説明</label>
+
+					<textarea name="description" placeholder="SETの説明を入力"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label>動画</label>
+
+					<input type="file" name="video" accept="video/*">
+				</div>
+
+				<div class="form-actions">
+
+					<button type="submit" class="primary-button">
+						SETを登録
+					</button>
+
+					<a href="/sets" class="back-link">
+						← SET一覧に戻る
+					</a>
+
+				</div>
+
+			</form>
+
+		</main>
+
+	</div>
+
+</body>
+
+</html>

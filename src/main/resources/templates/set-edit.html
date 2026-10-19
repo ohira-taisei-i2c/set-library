@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>SET編集 - SET LIBRARY</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+	<div class="container">
+
+		<header class="page-header">
+			<a href="/sets" class="site-title">SET LIBRARY</a>
+		</header>
+
+		<main>
+
+			<h2>SETを編集</h2>
+
+			<form th:action="@{/sets/{id}/update(id=${danceSet.id})}" method="post" class="set-form">
+
+				<div class="form-group">
+					<label>SET名</label>
+
+					<input type="text" name="name" th:value="${danceSet.name}" required>
+				</div>
+
+				<div class="form-group">
+					<label>カテゴリー</label>
+
+					<select name="category" required>
+
+						<option value="BASIC SET" th:selected="${danceSet.category == 'BASIC SET'}">
+							BASIC SET
+						</option>
+
+						<option value="UNIQUE SET" th:selected="${danceSet.category == 'UNIQUE SET'}">
+							UNIQUE SET
+						</option>
+
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>説明</label>
+
+					<textarea name="description" th:text="${danceSet.description}"></textarea>
+				</div>
+
+				<div class="form-group">
+
+					<label>登録済み動画</label>
+
+					<div th:if="${danceSet.videoUrl != null and !danceSet.videoUrl.isEmpty()}">
+
+						<video controls class="edit-video">
+							<source th:src="${danceSet.videoUrl}" type="video/mp4">
+							お使いのブラウザでは動画を再生できません。
+						</video>
+
+					</div>
+
+					<p th:if="${danceSet.videoUrl == null or danceSet.videoUrl.isEmpty()}" class="no-video">
+						動画は登録されていません。
+					</p>
+
+				</div>
+
+				<div class="form-actions">
+
+					<button type="submit" class="primary-button">
+						変更を保存
+					</button>
+
+					<a th:href="@{/sets/{id}(id=${danceSet.id})}" class="back-link">
+						← 詳細画面に戻る
+					</a>
+
+				</div>
+
+			</form>
+
+		</main>
+
+	</div>
+
+</body>
+
+</html>
