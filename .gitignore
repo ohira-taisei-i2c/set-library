@@ -38,3 +38,4 @@ build/
 
 # Local database configuration
 /src/main/resources/application.properties
+.DS_Store

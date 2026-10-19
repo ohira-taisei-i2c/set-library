@@ -13,8 +13,14 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "DANCE_SET")
+/**
+ * ブレイキンのSET情報を保持するエンティティ。
+ */
 public class DanceSet {
 	
+	/**
+	 * 新規登録時に作成日時と更新日時を設定する。
+	 */
 	@PrePersist
 	protected void onCreate() {
 	    LocalDateTime now = LocalDateTime.now();
@@ -22,6 +28,9 @@ public class DanceSet {
 	    updatedAt = now;
 	}
 
+	/**
+	 * 更新時に更新日時を現在時刻に設定する。
+	 */
 	@PreUpdate
 	protected void onUpdate() {
 	    updatedAt = LocalDateTime.now();
